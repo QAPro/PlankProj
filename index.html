@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Countdown Timer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Logo placeholder -->
+      <div class="logo">
+        <h1>Your Logo</h1>
+      </div>
+
+      <!-- Timer circle -->
+      <div class="timer">
+        <svg width="220" height="220">
+          <circle class="bg" cx="110" cy="110" r="100"></circle>
+          <circle class="progress" cx="110" cy="110" r="100"></circle>
+        </svg>
+        <div class="time-display">
+          <span id="minutes">00</span>:<span id="seconds">00</span>
+        </div>
+      </div>
+
+      <!-- Timer controls -->
+      <div class="controls">
+        <div class="adjust-buttons">
+          <button id="min-increase">+1 min</button>
+          <button id="min-decrease">-1 min</button>
+          <button id="sec-increase">+5 sec</button>
+          <button id="sec-decrease">-5 sec</button>
+        </div>
+        <div class="action-buttons">
+          <button id="start-pause">Start</button>
+          <button id="reset">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

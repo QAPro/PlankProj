@@ -1,0 +1,116 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    to bottom,
+    #87cefa,
+    #1e90ff
+  ); /* Gradient: Light to Dark Blue */
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  text-align: center;
+  width: 320px;
+}
+
+/* Logo */
+.logo h1 {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+/* Timer Circle */
+.timer {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 40px auto; /* Added bottom margin for space between circle and buttons */
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+}
+
+circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.bg {
+  stroke: rgba(255, 255, 255, 0.2); /* Light stroke for background */
+}
+
+.progress {
+  stroke: #fff;
+  stroke-dasharray: 628.32; /* Circumference of the circle (calculated: 2 * PI * r, r=100) */
+  stroke-dashoffset: 628.32; /* Initially fully hidden */
+  transition: stroke-dashoffset 1s linear;
+}
+
+/* Timer Text */
+.time-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfect center */
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Control Buttons */
+.controls {
+  margin-top: 20px;
+}
+
+.adjust-buttons,
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  color: #1e90ff;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:hover {
+  background-color: #f0f8ff; /* Lighter background on hover */
+}
+
+#start-pause {
+  background-color: #32cd32; /* Green start button */
+  color: white;
+}
+
+#reset {
+  background-color: #ff6347; /* Red reset button */
+  color: white;
+}
