@@ -35,14 +35,16 @@ body {
   position: relative;
   width: 220px;
   height: 220px;
-  margin: 0 auto 40px auto; /* Added bottom margin for space between circle and buttons */
+  margin: 0 auto 40px auto;
 }
 
 svg {
   position: absolute;
   top: 0;
   left: 0;
-  transform: rotate(-90deg);
+  transform: rotate(
+    -90deg
+  ); /* Rotate by -90deg so animation starts at 12 o'clock */
 }
 
 circle {
@@ -52,16 +54,15 @@ circle {
 }
 
 .bg {
-  stroke: rgba(255, 255, 255, 0.2); /* Light stroke for background */
+  stroke: rgba(255, 255, 255, 0.2); /* Light stroke for the background */
 }
 
 .progress {
-  stroke: #fff;
-  stroke-dasharray: 628.32; /* Circumference of the circle (calculated: 2 * PI * r, r=100) */
-  stroke-dashoffset: 628.32; /* Initially fully hidden */
+  stroke: #fff; /* White stroke */
+  stroke-dasharray: 628.32; /* Circumference of the circle */
+  stroke-dashoffset: 0; /* Full white circle at the start */
   transition: stroke-dashoffset 1s linear;
 }
-
 /* Timer Text */
 .time-display {
   position: absolute;
