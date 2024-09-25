@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Stats</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <button onclick="window.location.href='timer.html'">Timer</button>
+      <button onclick="window.location.href='profile.html'">Profile</button>
+      <button onclick="logout()">Log Out</button>
+    </nav>
+
+    <div class="stats-container">
+      <h1>Workout Stats</h1>
+      <p><strong>Total Workouts:</strong> <span id="totalWorkouts"></span></p>
+      <p>
+        <strong>Total Time Spent (min):</strong>
+        <span id="totalTimeSpent"></span>
+      </p>
+    </div>
+
+    <script src="stats.js"></script>
+  </body>
+</html>
