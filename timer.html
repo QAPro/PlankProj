@@ -16,6 +16,35 @@
         <h1>Your Logo</h1>
       </div>
 
+      <div class="nav-container">
+        <button onclick="window.location.href='profile.html'">Profile</button>
+        <button onclick="logout()">Log Out</button>
+      </div>
+
+      <script>
+        function logout() {
+          localStorage.removeItem("token");
+          window.location.href = "login.html";
+        }
+      </script>
+
+      <style>
+        .nav-container {
+          display: flex;
+          justify-content: space-between;
+          padding: 10px;
+        }
+
+        button {
+          padding: 10px 20px;
+          background-color: #1e90ff;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      </style>
+
       <!-- Timer circle -->
       <div class="timer">
         <svg width="220" height="220">
@@ -42,6 +71,6 @@
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>
