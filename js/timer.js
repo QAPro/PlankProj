@@ -8,6 +8,7 @@ const resetBtn = document.getElementById("reset");
 const minutesDisplay = document.getElementById("minutes");
 const secondsDisplay = document.getElementById("seconds");
 const progressCircle = document.querySelector(".progress");
+const countdownDisplay = document.getElementById("countdownDisplay"); // For 3-second countdown
 
 // Initial state
 let minutes = 0;
@@ -23,12 +24,39 @@ function updateDisplay() {
   secondsDisplay.textContent = String(seconds).padStart(2, "0");
 }
 
-// Timer countdown logic
+// Disable the Start button if no time is set
+function checkTime() {
+  if (minutes === 0 && seconds === 0) {
+    startPauseBtn.disabled = true;
+  } else {
+    startPauseBtn.disabled = false;
+  }
+}
+
+// Timer countdown logic with 3-second countdown
 function startTimer() {
   if (isRunning) return; // Prevent multiple intervals
-  isRunning = true;
 
-  // Recalculate the total time when the timer starts
+  // Start the 3-second countdown before the main timer starts
+  let countdown = 3;
+  countdownDisplay.style.display = "block"; // Show the countdown overlay
+  countdownDisplay.textContent = countdown;
+
+  const countdownInterval = setInterval(() => {
+    countdown--;
+    countdownDisplay.textContent = countdown;
+
+    if (countdown === 0) {
+      clearInterval(countdownInterval);
+      countdownDisplay.style.display = "none"; // Hide countdown after it finishes
+      runMainTimer(); // Start the main timer
+    }
+  }, 1000);
+}
+
+// Main timer logic (starts after countdown)
+function runMainTimer() {
+  isRunning = true;
   initialTotalTime = minutes * 60 + seconds;
 
   timerInterval = setInterval(() => {
@@ -86,22 +114,13 @@ function finishTimer() {
 
   // Play cheering sound
   playCheeringSound();
-
-  // alert("Timer complete! 🎉");
 }
 
-// New function to reset the entire UI after timer finishes
+// Reset the timer UI
 function resetTimerUI() {
-  // Reset the progress circle to its full white state
   progressCircle.style.strokeDashoffset = 0; // Full circle visible again
-
-  // Reset the button text back to 'Start'
-  startPauseBtn.textContent = "Start";
-
-  // Ensure the timer isn't running anymore
+  startPauseBtn.textContent = "Start"; // Reset button text
   isRunning = false;
-
-  // Also reset the initialTotalTime to prevent leftover values
   initialTotalTime = 0;
 }
 
@@ -118,54 +137,57 @@ function resetTimer() {
   minutes = 0;
   seconds = 0;
   updateDisplay();
-  progressCircle.style.strokeDashoffset = 0; // Full circle visible (white)
-  startPauseBtn.textContent = "Start"; // Reset the button to "Start" after reset
-
-  // Important: Reset initialTotalTime after resetting the timer
-  initialTotalTime = 0;
+  progressCircle.style.strokeDashoffset = 0; // Reset circle
+  startPauseBtn.textContent = "Start"; // Reset button text
+  initialTotalTime = 0; // Reset total time
+  checkTime(); // Recheck if Start button should be enabled
 }
 
 // Event listeners for buttons
 minIncreaseBtn.addEventListener("click", () => {
-  resetProgressCircle(); // Ensure progress circle is reset before setting new time
+  resetProgressCircle();
   minutes++;
   updateDisplay();
   recalculateTotalTime();
   updateProgress();
+  checkTime(); // Check if Start button should be enabled
 });
 
 minDecreaseBtn.addEventListener("click", () => {
   if (minutes > 0) {
-    resetProgressCircle(); // Ensure progress circle is reset before setting new time
+    resetProgressCircle();
     minutes--;
     updateDisplay();
     recalculateTotalTime();
     updateProgress();
+    checkTime(); // Check if Start button should be enabled
   }
 });
 
 secIncreaseBtn.addEventListener("click", () => {
-  resetProgressCircle(); // Ensure progress circle is reset before setting new time
+  resetProgressCircle();
   seconds = (seconds + 5) % 60;
   if (seconds === 0 && minutes < 59) minutes++;
   updateDisplay();
   recalculateTotalTime();
   updateProgress();
+  checkTime(); // Check if Start button should be enabled
 });
 
 secDecreaseBtn.addEventListener("click", () => {
   if (minutes > 0 || seconds > 0) {
-    resetProgressCircle(); // Ensure progress circle is reset before setting new time
+    resetProgressCircle();
     if (seconds === 0) {
       minutes--;
       seconds = 55;
     } else {
       seconds = (seconds - 5 + 60) % 60;
     }
+    updateDisplay();
+    recalculateTotalTime();
+    updateProgress();
+    checkTime(); // Check if Start button should be enabled
   }
-  updateDisplay();
-  recalculateTotalTime();
-  updateProgress();
 });
 
 startPauseBtn.addEventListener("click", () => {
@@ -182,13 +204,11 @@ resetBtn.addEventListener("click", () => {
   resetTimer();
 });
 
-// New helper function to reset the circle progress before adjusting time
+// Helper functions
 function resetProgressCircle() {
-  // Reset the progress circle to full white (no animation)
-  progressCircle.style.strokeDashoffset = 0;
+  progressCircle.style.strokeDashoffset = 0; // Full circle visible
 }
 
-// Helper function to recalculate total time when adjusting minutes/seconds
 function recalculateTotalTime() {
   initialTotalTime = minutes * 60 + seconds;
 }

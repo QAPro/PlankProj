@@ -6,15 +6,46 @@
     <title>My Stats</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <nav>
-      <button onclick="window.location.href='timer.html'">Timer</button>
-      <button onclick="window.location.href='profile.html'">Profile</button>
-      <button onclick="logout()">Log Out</button>
-    </nav>
+  
+    <body>
+      <!-- Add the nav bar here -->
+      
+<nav>
+  <div class="nav-container">
+      <div class="logo">
+          <a href="index.html">Workout Timer</a>
+      </div>
+      <div class="nav-links">
+          <a href="index.html">Timer</a>
+          <a href="profile.html">Profile</a>
+          <a href="stats.html">Stats</a>
+          <a href="#" onclick="logout()">Logout</a>
+      </div>
+      <!-- Hamburger menu for mobile -->
+      <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+  </div>
+</nav>
 
-    <div class="stats-container">
-      <h1>Workout Stats</h1>
+<script>
+  function logout() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+  }
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+  });
+</script>
+
+      <div class="stats-container">
+        <h1>Workout Stats</h1>
       <p><strong>Total Workouts:</strong> <span id="totalWorkouts"></span></p>
       <p>
         <strong>Total Time Spent (min):</strong>
@@ -22,6 +53,9 @@
       </p>
     </div>
 
-    <script src="stats.js"></script>
-  </body>
+    <script src="js/stats.js"></script>
+      </div>
+    </body>
+
+    
 </html>

@@ -19,7 +19,7 @@ document
       // Save token to local storage
       localStorage.setItem("token", result.token);
       alert("Login successful!");
-      window.location.href = "timer.html"; // Redirect to timer page after login
+      window.location.href = "index.html"; // Redirect to timer page after login
     } else {
       alert(result.msg || "Error during login");
     }

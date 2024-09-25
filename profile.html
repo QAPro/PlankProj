@@ -6,29 +6,133 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <nav>
-      <button onclick="window.location.href='timer.html'">Timer</button>
-      <button onclick="window.location.href='stats.html'">Stats</button>
-      <button onclick="logout()">Log Out</button>
-    </nav>
+  
+    <body>
+        <!-- Add the nav bar here -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">
+            <a href="index.html">Workout Timer</a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Timer</a>
+            <a href="profile.html">Profile</a>
+            <a href="stats.html">Stats</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+        <!-- Hamburger menu for mobile -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
 
-    <div class="profile-container">
-      <h1>Update Profile</h1>
-      <form id="profile-form">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" />
+<script>
+    function logout() {
+        localStorage.removeItem('token');
+        window.location.href = 'login.html';
+    }
 
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" />
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+</script>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" />
+        <div class="profile-container"> 
+            <!-- Avatar Section -->
+      <div class="avatar-container">
+        <img
+          id="avatar"
+          src="https://via.placeholder.com/150"
+          alt="User Avatar"
+          class="avatar"
+        />
+      </div>
 
-        <button type="submit">Update Profile</button>
-      </form>
+      <!-- Username Field -->
+      <div class="field-container">
+        <label for="username">Username:</label>
+        <span id="usernameDisplay">Crashbug007</span>
+        <button class="edit-icon" id="editUsername">
+          <img src="img/edit-icon.png" alt="Edit" />
+        </button>
+      </div>
+      <input
+        type="text"
+        id="usernameInput"
+        class="edit-field"
+        style="display: none"
+      />
+      <button id="saveUsername" class="save-button" style="display: none">
+        Save
+      </button>
+      <button id="cancelUsername" class="cancel-button" style="display: none">
+        Cancel
+      </button>
+
+      <!-- Email Field -->
+      <div class="field-container">
+        <label for="email">Email:</label>
+        <span id="emailDisplay">user@example.com</span>
+        <button class="edit-icon" id="editEmail">
+          <img src="img/edit-icon.png" alt="Edit" />
+        </button>
+      </div>
+      <input
+        type="email"
+        id="emailInput"
+        class="edit-field"
+        style="display: none"
+      />
+      <button id="saveEmail" class="save-button" style="display: none">
+        Save
+      </button>
+      <button id="cancelEmail" class="cancel-button" style="display: none">
+        Cancel
+      </button>
+
+      <!-- Password Field -->
+      <div class="field-container">
+        <label>Password:</label>
+        <span>******</span>
+        <button class="edit-icon" id="editPassword">
+          <img src="img/edit-icon.png" alt="Edit" />
+        </button>
+      </div>
+      <div id="passwordFields" style="display: none">
+        <input
+          type="password"
+          id="currentPassword"
+          placeholder="Current Password"
+        />
+        <input type="password" id="newPassword" placeholder="New Password" />
+        <input
+          type="password"
+          id="confirmNewPassword"
+          placeholder="Confirm New Password"
+        />
+      </div>
+      <button id="savePassword" class="save-button" style="display: none">
+        Update Password
+      </button>
+      <button id="cancelPassword" class="cancel-button" style="display: none">
+        Cancel
+      </button>
+
+      <!-- Inspirational Quote Section -->
+      <div class="quote-container">
+        <p id="quote">"Inspiration goes here!"</p>
+      </div>
     </div>
 
     <script src="js/profile.js"></script>
-  </body>
+             </div>
+    </body>
+    
+   
 </html>

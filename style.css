@@ -5,6 +5,109 @@
   box-sizing: border-box;
 }
 
+/* General Navigation Styles */
+nav {
+  background-color: #1e90ff;
+  padding: 10px 20px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo a {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 1.1rem;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+/* Hide nav links for mobile by default */
+.nav-links {
+  display: none; /* Hide links by default on mobile */
+  transition: opacity 0.3s ease; /* Smooth fade effect */
+}
+
+/* Hamburger menu */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 4px;
+  transition: 0.3s;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .nav-links.active {
+    display: block;
+    position: absolute;
+    top: 60px; /* Position it just below the navbar */
+    right: 20px; /* Align it to the right, under the hamburger */
+    width: auto; /* Set width to fit content */
+    background-color: rgba(30, 144, 255, 0.9); /* Semi-transparent background */
+    padding: 10px 20px;
+    border-radius: 8px;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 10px 20px;
+    margin: 5px 0;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Background for each link */
+    color: #1e90ff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+  }
+
+  .nav-links a:hover {
+    background-color: rgba(255, 255, 255, 0.6); /* Darken slightly on hover */
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex; /* Always show links on desktop */
+  }
+}
+
+/* Make sure the content doesn't overlap with the nav */
+body {
+  padding-top: 60px;
+}
+
 body {
   height: 100vh;
   display: flex;
@@ -21,13 +124,6 @@ body {
 .container {
   text-align: center;
   width: 320px;
-}
-
-/* Logo */
-.logo h1 {
-  font-size: 24px;
-  color: white;
-  margin-bottom: 20px;
 }
 
 /* Timer Circle */
@@ -103,7 +199,7 @@ button:active {
 }
 
 button:hover {
-  background-color: #f0f8ff; /* Lighter background on hover */
+  background-color: lightblue; /* Lighter background on hover */
 }
 
 #start-pause {
@@ -159,4 +255,69 @@ button {
   form {
     width: 50%; /* Constrain form width on larger screens */
   }
+}
+
+/* Add avatar and field styling here at the bottom */
+/* Profile Page Styling */
+/* Center the avatar */
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+/* Field container */
+.field-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Edit button */
+.edit-icon img {
+  width: 20px;
+  cursor: pointer;
+}
+
+/* Editable input fields */
+.edit-field {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.save-button {
+  padding: 10px 20px;
+  background-color: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+}
+
+/* Add these styles for the cancel button */
+.cancel-button {
+  padding: 10px 20px;
+  background-color: #f44336; /* Red color for cancel */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Quote section */
+.quote-container {
+  text-align: center;
+  font-style: italic;
+  margin-top: 20px;
 }
