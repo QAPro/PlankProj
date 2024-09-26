@@ -15,7 +15,7 @@ const plankTypeDropdown = document.getElementById("plankType");
 // Capture plank type and duration when logging the workout
 async function logWorkout() {
   const plankType = plankTypeDropdown.value;
-  const duration = initialTotalTime; // Use initial time rather than minutes and seconds
+  const duration = initialTotalTime; // Use the initially set time for duration
 
   const token = localStorage.getItem("token");
   try {
@@ -31,8 +31,7 @@ async function logWorkout() {
     if (response.ok) {
       console.log("Workout logged successfully");
     } else {
-      const errorData = await response.json();
-      console.error("Error logging workout:", errorData.msg);
+      console.error("Error logging workout");
     }
   } catch (error) {
     console.error("Fetch error:", error.message);
