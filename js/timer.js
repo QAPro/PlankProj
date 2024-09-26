@@ -57,34 +57,43 @@ function startTimer() {
 // Main timer logic (starts after countdown)
 function runMainTimer() {
   isRunning = true;
-  initialTotalTime = minutes * 60 + seconds;
+  startPauseBtn.textContent = "Pause"; // Change button to "Pause"
 
-  timerInterval = setInterval(() => {
-    if (minutes === 0 && seconds === 0) {
+  let totalSeconds = minutes * 60 + seconds;
+
+  // Trigger the first countdown immediately
+  tick(); // Call the first tick immediately without waiting for the interval
+
+  // Then start the interval for subsequent seconds
+  timerInterval = setInterval(tick, 1000);
+
+  function tick() {
+    if (totalSeconds <= 0) {
       clearInterval(timerInterval);
       isRunning = false;
-      finishTimer();
+      startPauseBtn.textContent = "Start"; // Reset button to "Start"
+      finishTimer(); // Trigger celebration or completion action
     } else {
-      if (seconds === 0) {
-        minutes--;
-        seconds = 59;
-      } else {
-        seconds--;
-      }
-      updateDisplay();
-      updateProgress();
+      totalSeconds--;
+
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+
+      minutesDisplay.textContent = minutes.toString().padStart(2, "0");
+      secondsDisplay.textContent = seconds.toString().padStart(2, "0");
+
+      // Update the circular progress animation
+      updateProgress(totalSeconds, initialTotalTime); // Pass remaining time and total time
     }
-  }, 1000);
+  }
 }
 
 // Update the circular progress animation
-function updateProgress() {
-  const currentTotalTime = minutes * 60 + seconds;
-
+function updateProgress(totalSeconds, initialTotalTime) {
   if (initialTotalTime > 0) {
-    const progressValue = currentTotalTime / initialTotalTime;
+    const progressValue = totalSeconds / initialTotalTime;
     progressCircle.style.strokeDashoffset =
-      totalCircleLength * (1 - progressValue); // Decreasing the stroke-dashoffset as the time runs down
+      totalCircleLength * (1 - progressValue); // Animate counterclockwise
   }
 }
 
