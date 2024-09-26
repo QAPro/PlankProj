@@ -6,46 +6,51 @@
     <title>My Stats</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  
-    <body>
-      <!-- Add the nav bar here -->
-      
-<nav>
-  <div class="nav-container">
-      <div class="logo">
+
+  <body>
+    <!-- Add the nav bar here -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">
           <a href="index.html">Workout Timer</a>
-      </div>
-      <div class="nav-links">
+        </div>
+        <div class="nav-links">
           <a href="index.html">Timer</a>
           <a href="profile.html">Profile</a>
           <a href="stats.html">Stats</a>
           <a href="#" onclick="logout()">Logout</a>
+        </div>
+        <!-- Hamburger menu for mobile -->
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
-      <!-- Hamburger menu for mobile -->
-      <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-      </div>
-  </div>
-</nav>
+    </nav>
 
-<script>
-  function logout() {
-      localStorage.removeItem('token');
-      window.location.href = 'login.html';
-  }
+    <script>
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
 
-  // Mobile menu toggle
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.querySelector('.nav-links');
-  hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
-  });
-</script>
+      // Mobile menu toggle
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.querySelector(".nav-links");
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
 
-      <div class="stats-container">
-        <h1>Workout Stats</h1>
+    <!-- Existing stats -->
+    <div class="stats-container">
+      <h1>Workout Stats</h1>
+      <p><strong>Current Streak:</strong> <span id="currentStreak"></span></p>
+      <p>
+        <strong>Improvement Percent:</strong>
+        <span id="improvementPercent"></span>
+      </p>
       <p><strong>Total Workouts:</strong> <span id="totalWorkouts"></span></p>
       <p>
         <strong>Total Time Spent (min):</strong>
@@ -54,8 +59,5 @@
     </div>
 
     <script src="js/stats.js"></script>
-      </div>
-    </body>
-
-    
+  </body>
 </html>

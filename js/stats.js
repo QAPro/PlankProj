@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const token = localStorage.getItem("token"); // Get token from local storage
+  const token = localStorage.getItem("token");
 
   const response = await fetch("http://localhost:5000/api/stats/myStats", {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`, // Send token with request
+      Authorization: `Bearer ${token}`, // Token sent with Bearer scheme
     },
   });
 
@@ -12,8 +12,15 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   if (response.ok) {
     document.getElementById("totalWorkouts").textContent = result.totalWorkouts;
-    document.getElementById("totalTimeSpent").textContent =
-      result.totalTimeSpent;
+    document.getElementById(
+      "totalTimeSpent"
+    ).textContent = `${result.totalTimeSpent} minutes`;
+    document.getElementById(
+      "currentStreak"
+    ).textContent = `${result.currentStreak} days`;
+    document.getElementById(
+      "improvementPercent"
+    ).textContent = `${result.improvementPercent}%`;
   } else {
     alert(result.msg || "Error fetching stats");
   }

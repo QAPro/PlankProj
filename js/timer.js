@@ -10,6 +10,43 @@ const secondsDisplay = document.getElementById("seconds");
 const progressCircle = document.querySelector(".progress");
 const countdownDisplay = document.getElementById("countdownDisplay"); // For 3-second countdown
 
+const plankTypeDropdown = document.getElementById("plankType");
+
+// Capture plank type and duration when logging the workout
+async function logWorkout() {
+  const plankType = plankTypeDropdown.value;
+  const duration = initialTotalTime; // Use initial time rather than minutes and seconds
+
+  const token = localStorage.getItem("token");
+  try {
+    const response = await fetch("http://localhost:5000/api/stats/logWorkout", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ plankType, duration }),
+    });
+
+    if (response.ok) {
+      console.log("Workout logged successfully");
+    } else {
+      const errorData = await response.json();
+      console.error("Error logging workout:", errorData.msg);
+    }
+  } catch (error) {
+    console.error("Fetch error:", error.message);
+  }
+}
+
+// Call logWorkout at the end of the timer
+function finishTimer() {
+  resetTimerUI();
+  launchConfetti();
+  playCheeringSound();
+  logWorkout(); // Log the completed workout session
+}
+
 // Initial state
 let minutes = 0;
 let seconds = 0;
@@ -36,6 +73,9 @@ function checkTime() {
 // Timer countdown logic with 3-second countdown
 function startTimer() {
   if (isRunning) return; // Prevent multiple intervals
+
+  // Calculate initial total time when the timer starts
+  initialTotalTime = minutes * 60 + seconds;
 
   // Start the 3-second countdown before the main timer starts
   let countdown = 3;
