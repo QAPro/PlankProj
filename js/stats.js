@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (response.ok) {
       const stats = await response.json();
 
+      console.log("Fetched stats:", stats); // Check what stats are received
+
       // Update the stats in the HTML
       document.getElementById("totalWorkouts").textContent =
         stats.totalWorkouts;
